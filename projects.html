@@ -1,0 +1,96 @@
+import React from 'react';
+import { ExternalLink, Github } from 'lucide-react';
+
+const Projects: React.FC = () => {
+  return (
+    <section id="projects" className="py-20 px-6 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Featured Projects</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">Here are some of the projects I've worked on recently.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          {/* Project 1 */}
+          <div className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            <div className="relative h-48 overflow-hidden">
+              <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://picsum.photos/600/400?random=1" alt="E-Commerce Dashboard" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-xl font-bold text-primary mb-2">E-Commerce Dashboard</h3>
+              <p className="text-gray-600 text-sm mb-4 flex-grow">A comprehensive admin dashboard for managing products, orders, and analytics with real-time data visualization.</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">React</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">TypeScript</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Recharts</span>
+              </div>
+              <div className="flex gap-3 mt-auto">
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
+                  <Github size={16} /> Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 2 */}
+          <div className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            <div className="relative h-48 overflow-hidden">
+              <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://picsum.photos/600/400?random=2" alt="Task Management App" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-xl font-bold text-primary mb-2">Task Management App</h3>
+              <p className="text-gray-600 text-sm mb-4 flex-grow">Collaborative task manager allowing teams to organize workflows, drag-and-drop tasks, and track progress.</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Next.js</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Tailwind</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Firebase</span>
+              </div>
+              <div className="flex gap-3 mt-auto">
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
+                  <Github size={16} /> Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Project 3 */}
+          <div className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
+            <div className="relative h-48 overflow-hidden">
+              <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
+              <img src="https://picsum.photos/600/400?random=3" alt="AI Image Generator" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-xl font-bold text-primary mb-2">AI Image Generator</h3>
+              <p className="text-gray-600 text-sm mb-4 flex-grow">A SaaS platform integration with Gemini API to generate creative images from text prompts.</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Node.js</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Express</span>
+                <span className="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Gemini API</span>
+              </div>
+              <div className="flex gap-3 mt-auto">
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+                <a href="#" className="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
+                  <Github size={16} /> Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;

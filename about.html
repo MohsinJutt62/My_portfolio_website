@@ -1,0 +1,79 @@
+import React from 'react';
+import { Layout, Server, Database, Code } from 'lucide-react';
+
+const About: React.FC = () => {
+  return (
+    <section id="about" className="py-20 px-6 bg-gray-50">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">About Me</h2>
+          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-700 leading-loose">
+                I am a dedicated <strong>Software Engineer</strong> with a passion for building scalable web applications. 
+                My journey involves a deep dive into modern web technologies, ensuring that every line of code adds value 
+                to the end-user experience.
+              </p>
+              <p className="text-lg text-gray-700 leading-loose">
+                I specialize in full-stack development, bridging the gap between elegant user interfaces and robust backend logic.
+                When I'm not coding, I'm exploring new design trends or contributing to open-source communities.
+              </p>
+            </div>
+
+            <div className="flex gap-12 pt-2">
+              <div>
+                <h4 className="text-4xl font-bold text-accent mb-1">15+</h4>
+                <p className="text-gray-600 font-medium">Projects Completed</p>
+              </div>
+              <div>
+                <h4 className="text-4xl font-bold text-accent mb-1">1+</h4>
+                <p className="text-gray-600 font-medium">Year of Experience</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Frontend */}
+            <div className="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <Layout className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary mb-2">Frontend Development</h3>
+              <p className="text-sm text-gray-500">React, Tailwind, TypeScript</p>
+            </div>
+            {/* Backend */}
+            <div className="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <Server className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary mb-2">Backend Development</h3>
+              <p className="text-sm text-gray-500">Node.js, Express, Python</p>
+            </div>
+            {/* Database */}
+            <div className="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <Database className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary mb-2">Database Design</h3>
+              <p className="text-sm text-gray-500">PostgreSQL, MongoDB</p>
+            </div>
+            {/* Clean Code */}
+            <div className="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+                <Code className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary mb-2">Clean Code</h3>
+              <p className="text-sm text-gray-500">Best Practices, Testing, CI/CD</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static/dist/lucide.min.css">
+  <style>
+    /* Fade-in animation for mobile menu */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-900">
+
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex justify-center w-full px-4 sm:px-8 pt-5 transition-all duration-300">
+  <nav class="w-full max-w-7xl bg-primary/70 backdrop-blur-xl rounded-[50px] px-8 py-4 shadow-[0_8px_32px_0_rgba(31,38,135,0.2)] border border-white/20 flex justify-between items-center transition-all duration-300 hover:bg-primary/80 hover:border-white/40 relative">
+
+    <!-- Logo -->
+    <div class="text-xl md:text-2xl font-bold text-white tracking-wide">
+      <a href="#home" class="transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">
+        My Portfolio
+      </a>
+    </div>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-8 items-center">
+      <li><a href="#home" class="relative text-white font-medium text-sm lg:text-base transition-all duration-300 hover:text-accent hover:drop-shadow-[0_0_8px_rgba(110,140,251,0.8)]">Home</a></li>
+      <li><a href="#about" class="relative text-white font-medium text-sm lg:text-base transition-all duration-300 hover:text-accent hover:drop-shadow-[0_0_8px_rgba(110,140,251,0.8)]">About</a></li>
+      <li><a href="#projects" class="relative text-white font-medium text-sm lg:text-base transition-all duration-300 hover:text-accent hover:drop-shadow-[0_0_8px_rgba(110,140,251,0.8)]">Projects</a></li>
+      <li><a href="#contact" class="relative text-white font-medium text-sm lg:text-base transition-all duration-300 hover:text-accent hover:drop-shadow-[0_0_8px_rgba(110,140,251,0.8)]">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-accent focus:outline-none transition-colors hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
+      <span id="menu-icon">&#9776;</span> <!-- hamburger -->
+    </button>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 mt-4 bg-primary/90 backdrop-blur-2xl rounded-3xl p-6 shadow-2xl flex flex-col gap-4 items-center md:hidden border border-white/20 mx-4 animate-fadeIn ring-1 ring-white/10">
+      <a href="#home" class="mobile-link text-white text-lg font-medium hover:text-accent transition-all duration-300 hover:drop-shadow-[0_0_5px_rgba(110,140,251,0.8)]">Home</a>
+      <a href="#about" class="mobile-link text-white text-lg font-medium hover:text-accent transition-all duration-300 hover:drop-shadow-[0_0_5px_rgba(110,140,251,0.8)]">About</a>
+      <a href="#projects" class="mobile-link text-white text-lg font-medium hover:text-accent transition-all duration-300 hover:drop-shadow-[0_0_5px_rgba(110,140,251,0.8)]">Projects</a>
+      <a href="#contact" class="mobile-link text-white text-lg font-medium hover:text-accent transition-all duration-300 hover:drop-shadow-[0_0_5px_rgba(110,140,251,0.8)]">Contact</a>
+    </div>
+
+  </nav>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    if(menuIcon.innerHTML === '☰') {
+      menuIcon.innerHTML = '✕'; // X icon
+    } else {
+      menuIcon.innerHTML = '☰';
+    }
+  });
+</script>
+
+</body>
+</html>
