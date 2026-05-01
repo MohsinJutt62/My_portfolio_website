@@ -41,6 +41,230 @@
         scroll-behavior: smooth;
         scroll-padding-top: 100px;
       }
+
+      /* Navbar: semi-transparent rgba(80,108,244) + cursor-following shiny halo */
+      #main-header nav {
+        /* slightly transparent blue */
+        background-color: rgba(80, 108, 244, 0.75) !important;
+         transition: background-color 0.3s ease;
+         position: relative;
+         overflow: hidden;
+       }
+
+      /* stronger color on hover */
+      #main-header nav:hover {
+        background-color: rgba(80, 108, 244, 0.9) !important;
+      }
+      
+       /* radial shiny halo follows mouse (uses --x / --y set by JS) */
+       #main-header nav::before {
+         content: "";
+         position: absolute;
+         inset: 0;
+         pointer-events: none;
+         background: radial-gradient(
+           circle at var(--x, 50%) var(--y, 50%),
+           rgba(255,255,255,0.45) 0,
+           rgba(255,255,255,0.08) 40px,
+           transparent 120px
+         );
+         mix-blend-mode: overlay;
+         opacity: 0;
+         transition: opacity 0.18s ease, transform 0.18s ease;
+         transform: translateZ(0);
+       }
+
+       /* show halo when active */
+       #main-header nav.nav-halo-active::before {
+         opacity: 1;
+       }
+
+      /* --- NEW: shiny outline around navbar links on hover --- */
+      #main-header nav ul li a,
+      #mobile-menu .mobile-link {
+        position: relative;
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 10px;
+        transition: color .18s ease, transform .18s ease;
+        z-index: 0;
+      }
+
+      /* pseudo element creates the shiny line/halo */
+      #main-header nav ul li a::before,
+      #mobile-menu .mobile-link::before {
+        content: "";
+        position: absolute;
+        inset: -6px;                /* how far the shiny line sits from the link */
+        border-radius: 14px;
+        background: linear-gradient(90deg,
+          rgba(255,255,255,0.30) 0%,
+          rgba(110,140,251,0.85) 40%,
+          rgba(255,255,255,0.25) 100%);
+        opacity: 0;
+        transform: scale(.95);
+        transition: opacity .22s ease, transform .22s ease;
+        filter: blur(6px);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* reveal shiny line on hover/focus */
+      #main-header nav ul li a:hover::before,
+      #main-header nav ul li a:focus::before,
+      #mobile-menu .mobile-link:hover::before,
+      #mobile-menu .mobile-link:focus::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* ensure hovered link text remains readable */
+      #main-header nav ul li a:hover,
+      #main-header nav ul li a:focus,
+      #mobile-menu .mobile-link:hover,
+      #mobile-menu .mobile-link:focus {
+        color: #fff !important;
+      }
+
+      /* Stylish CTA hover animation for "View my work" / "View Projects" */
+      .cta-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.65rem 1.1rem;
+        border-radius: 12px;
+        color: #fff;
+        font-weight: 600;
+        background: linear-gradient(90deg, rgba(80,108,244,1), rgba(129,143,235,0.95));
+        box-shadow: 0 10px 30px rgba(80,108,244,0.18);
+        overflow: hidden;
+        transition: transform .22s ease, box-shadow .22s ease;
+        z-index: 0;
+      }
+
+      /* moving glossy stripe */
+      .cta-button::after {
+        content: "";
+        position: absolute;
+        top: -10%;
+        left: -60%;
+        width: 40%;
+        height: 120%;
+        background: linear-gradient(90deg,
+                    rgba(255,255,255,0.18) 0%,
+                    rgba(255,255,255,0.35) 50%,
+                    rgba(255,255,255,0.12) 100%);
+        transform: skewX(-20deg);
+        transition: left .6s cubic-bezier(.2,.9,.2,1);
+        pointer-events: none;
+        filter: blur(8px);
+        mix-blend-mode: overlay;
+      }
+
+      /* subtle border glow */
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 14px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+        z-index: -1;
+        transition: box-shadow .22s ease;
+      }
+
+      .cta-button .arrow {
+        display: inline-block;
+        transition: transform .28s ease, opacity .2s ease;
+        opacity: .95;
+      }
+
+      /* Hover states */
+      .cta-button:hover,
+      .cta-button:focus {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 18px 40px rgba(80,108,244,0.24);
+      }
+      .cta-button:hover::after,
+      .cta-button:focus::after {
+        left: 120%;
+      }
+      .cta-button:hover .arrow,
+      .cta-button:focus .arrow {
+        transform: translateX(8px) rotate(0deg);
+      }
+
+      /* keyboard focus visible */
+      .cta-button:focus-visible {
+        outline: 3px solid rgba(129,143,235,0.22);
+        outline-offset: 3px;
+      }
+
+      /* Stylish Send Message button (added) */
+      .send-btn{
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: .85rem 1rem;
+        border-radius: 12px;
+        color: #fff;
+        font-weight: 700;
+        background: linear-gradient(90deg, rgba(80,108,244,1), rgba(129,143,235,0.95));
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 12px 30px rgba(80,108,244,0.16);
+        overflow: hidden;
+        transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease, filter .18s ease;
+        z-index: 0;
+      }
+      .send-btn::after{
+        content: "";
+        position: absolute;
+        top: -20%;
+        left: -60%;
+        width: 40%;
+        height: 140%;
+        background: linear-gradient(90deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.36) 50%, rgba(255,255,255,0.08) 100%);
+        transform: skewX(-18deg);
+        filter: blur(8px);
+        transition: left .65s cubic-bezier(.2,.9,.2,1);
+        pointer-events: none;
+        mix-blend-mode: overlay;
+      }
+      .send-btn::before{
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 13px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        z-index: -1;
+        transition: box-shadow .22s ease;
+      }
+      .send-btn .icon {
+        display: inline-flex;
+        transition: transform .28s ease;
+      }
+
+      .send-btn:hover,
+      .send-btn:focus{
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 22px 48px rgba(80,108,244,0.22);
+        filter: saturate(1.05);
+      }
+      .send-btn:hover::after,
+      .send-btn:focus::after{
+        left: 120%;
+      }
+      .send-btn:active{
+        transform: translateY(-1px) scale(0.995);
+      }
+      .send-btn:focus-visible{
+        outline: 3px solid rgba(129,143,235,0.2);
+        outline-offset: 4px;
+      }
+
     </style>
   <script type="importmap">
 {
@@ -51,6 +275,16 @@
   }
 }
 </script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<!-- SVG wrapper favicon that clips the image to a circle (data URL) -->
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs><clipPath id="c"><circle cx="32" cy="32" r="32"/></clipPath></defs>
+    <image clip-path="url(#c)" width="64" height="64" href="favicon.png" preserveAspectRatio="xMidYMid slice"/>
+  </svg>'>
 </head>
   <body class="bg-white text-textDark antialiased selection:bg-accent selection:text-white">
     
@@ -117,9 +351,15 @@
             </p>
   
             <div class="pt-4">
-              <a href="#projects" class="group inline-flex items-center gap-2 bg-accent text-white px-8 py-3 rounded-full text-lg font-medium shadow-lg hover:bg-tertiary hover:scale-105 transition-all duration-300">
-                View My Work
-                <i data-lucide="arrow-down" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+              <a href="#projects" class="cta-button" aria-label="View my work">
+                <span>View my work</span>
+                <span class="arrow" aria-hidden="true">
+                  <!-- simple arrow SVG -->
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block">
+                    <path d="M5 12h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
               </a>
             </div>
           </div>
@@ -129,7 +369,7 @@
             <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px]">
               <div class="absolute inset-0 bg-secondary rounded-[40px] rotate-6 opacity-20"></div>
               <img 
-                src="mohsin.png" 
+                src="background-replacer-result (3).png" 
                 alt="Mohsin Sajjad" 
                 onerror="this.src='https://ui-avatars.com/api/?name=Mohsin+Sajjad&background=50589C&color=fff&size=500'"
                 class="relative w-full h-full object-cover object-top rounded-[40px] shadow-2xl border-4 border-white z-10 hover:rotate-0 transition-transform duration-500"
@@ -161,47 +401,54 @@
                 </p>
               </div>
   
-              <div class="flex gap-12 pt-2">
-                <div>
-                  <h4 class="text-4xl font-bold text-accent mb-1">15+</h4>
-                  <p class="text-gray-600 font-medium">Projects Completed</p>
-                </div>
-                <div>
-                  <h4 class="text-4xl font-bold text-accent mb-1">1+</h4>
-                  <p class="text-gray-600 font-medium">Year of Experience</p>
-                </div>
+              <div class="flex gap-6 pt-2">
+                <button aria-label="15+ Projects Completed" class="group flex items-center gap-4 bg-gradient-to-r from-accent to-tertiary text-white px-6 py-4 rounded-2xl shadow-lg border border-white/10 transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl">
+                  <div class="text-3xl font-extrabold leading-none">15+</div>
+                  <div class="text-left">
+                    <div class="text-sm font-semibold">Projects Completed</div>
+                    <div class="text-xs opacity-80">Delivered with care</div>
+                  </div>
+                </button>
+
+                <button aria-label="1+ Year of Experience" class="group flex items-center gap-4 bg-white/90 text-primary px-6 py-4 rounded-2xl shadow-md border border-primary/10 transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-lg">
+                  <div class="text-3xl font-extrabold text-accent leading-none">1+</div>
+                  <div class="text-left">
+                    <div class="text-sm font-semibold text-gray-800">Year of Experience</div>
+                    <div class="text-xs text-gray-500">Growing every day</div>
+                  </div>
+                </button>
               </div>
             </div>
   
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <!-- Frontend -->
               <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                  <i data-lucide="layout" class="w-6 h-6"></i>
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 overflow-hidden">
+                  <img src="Screenshot%202025-12-11%20164257.png" alt="Frontend screenshot" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Frontend Development</h3>
-                <p class="text-sm text-gray-500">React, Tailwind, TypeScript</p>
+                <p class="text-sm text-gray-500">Javascript, Html , CSS</p>
               </div>
               <!-- Backend -->
               <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                  <i data-lucide="server" class="w-6 h-6"></i>
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 overflow-hidden">
+                  <img src="Screenshot%202025-12-15%20002948.png" alt="Backend screenshot" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Backend Development</h3>
                 <p class="text-sm text-gray-500">Node.js, Express, Python</p>
               </div>
               <!-- Database -->
               <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                  <i data-lucide="database" class="w-6 h-6"></i>
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 overflow-hidden">
+                  <img src="Screenshot%202025-12-15%20003357.png" alt="Database screenshot" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Database Design</h3>
-                <p class="text-sm text-gray-500">PostgreSQL, MongoDB</p>
+                <p class="text-sm text-gray-500">MySQL, MongoDB</p>
               </div>
               <!-- Clean Code -->
               <div class="bg-white p-6 rounded-xl shadow-md border-b-4 border-transparent hover:border-accent transition-all duration-300 hover:-translate-y-1">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
-                  <i data-lucide="code" class="w-6 h-6"></i>
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 overflow-hidden">
+                  <img src="Screenshot%202025-12-15%20003641.png" alt="Clean code screenshot" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Clean Code</h3>
                 <p class="text-sm text-gray-500">Best Practices, Testing, CI/CD</p>
@@ -225,24 +472,17 @@
             <div class="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 flex flex-col">
               <div class="relative h-48 overflow-hidden">
                 <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
-                <img src="https://picsum.photos/600/400?random=1" alt="E-Commerce Dashboard" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                <img src="asdfg.png" alt="Online Game Site" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-bold text-primary mb-2">E-Commerce Dashboard</h3>
-                <p class="text-gray-600 text-sm mb-4 flex-grow">A comprehensive admin dashboard for managing products, orders, and analytics with real-time data visualization.</p>
+                <h3 class="text-xl font-bold text-primary mb-2">Online Game Site</h3>
+                <p class="text-gray-600 text-sm mb-4 flex-grow">A comprehensive Online Game web dashboard for playing Games online, multiplayer and real-time visualization</p>
                 <div class="flex flex-wrap gap-2 mb-6">
-                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">React</span>
-                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">TypeScript</span>
-                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Recharts</span>
+                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Html</span>
+                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">CSS</span>
+                  <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">JavaScript</span>
                 </div>
-                <div class="flex gap-3 mt-auto">
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
-                    <i data-lucide="external-link" size="16"></i> Live Demo
-                  </a>
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
-                    <i data-lucide="github" size="16"></i> Code
-                  </a>
-                </div>
+                <!-- Removed Live Demo / Code buttons as requested -->
               </div>
             </div>
   
@@ -260,14 +500,7 @@
                   <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Tailwind</span>
                   <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Firebase</span>
                 </div>
-                <div class="flex gap-3 mt-auto">
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
-                    <i data-lucide="external-link" size="16"></i> Live Demo
-                  </a>
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
-                    <i data-lucide="github" size="16"></i> Code
-                  </a>
-                </div>
+                <!-- Live Demo / Code buttons removed -->
               </div>
             </div>
   
@@ -285,14 +518,7 @@
                   <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Express</span>
                   <span class="px-3 py-1 bg-gray-100 text-primary text-xs font-medium rounded-full">Gemini API</span>
                 </div>
-                <div class="flex gap-3 mt-auto">
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg bg-primary text-white text-sm hover:bg-secondary transition-colors">
-                    <i data-lucide="external-link" size="16"></i> Live Demo
-                  </a>
-                  <a href="#" class="flex-1 inline-flex justify-center items-center gap-2 py-2 rounded-lg border border-primary text-primary text-sm hover:bg-gray-50 transition-colors">
-                    <i data-lucide="github" size="16"></i> Code
-                  </a>
-                </div>
+                <!-- Live Demo / Code buttons removed -->
               </div>
             </div>
   
@@ -319,8 +545,8 @@
   
               <div class="space-y-6">
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md text-accent">
-                    <i data-lucide="mail"></i>
+                  <div class="w-12 h-12 bg-white rounded-full overflow-hidden flex items-center justify-center shadow-md">
+                    <img src="df.png" alt="Email avatar" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                   </div>
                   <div>
                     <h4 class="font-medium text-gray-900">Email</h4>
@@ -329,8 +555,8 @@
                 </div>
   
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md text-accent">
-                    <i data-lucide="phone"></i>
+                  <div class="w-12 h-12 bg-white rounded-full overflow-hidden flex items-center justify-center shadow-md">
+                    <img src="ad.png" alt="Phone avatar" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                   </div>
                   <div>
                     <h4 class="font-medium text-gray-900">Phone</h4>
@@ -339,8 +565,8 @@
                 </div>
   
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md text-accent">
-                    <i data-lucide="map-pin"></i>
+                  <div class="w-12 h-12 bg-white rounded-full overflow-hidden flex items-center justify-center shadow-md">
+                    <img src="wda.png" alt="Location" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'"/>
                   </div>
                   <div>
                     <h4 class="font-medium text-gray-900">Location</h4>
@@ -369,9 +595,10 @@
                   <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none" placeholder="Tell me about your project..." required></textarea>
                 </div>
   
-                <button type="submit" class="w-full bg-accent text-white py-4 rounded-lg font-semibold hover:bg-tertiary transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
-                  <i data-lucide="send" size="18"></i> Send Message
-                </button>
+                <button type="submit" class="send-btn" aria-label="Send Message">
+                <i data-lucide="send" size="18" class="icon"></i>
+                <span>Send Message</span>
+              </button>
               </form>
             </div>
           </div>
@@ -393,14 +620,17 @@
               Building digital experiences with passion and precision.
             </p>
             <div class="flex gap-4 justify-center md:justify-start">
-              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
-                <i data-lucide="github" size="20"></i>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 overflow-hidden flex items-center justify-center hover:bg-accent transition-colors">
+                <img src="ins.png" alt="Instagram" class="w-full h-full object-cover"/>
               </a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
-                <i data-lucide="linkedin" size="20"></i>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 overflow-hidden flex items-center justify-center hover:bg-accent transition-colors">
+                <img src="fb.png" alt="Facebook" class="w-full h-full object-cover"/>
               </a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
-                <i data-lucide="twitter" size="20"></i>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 overflow-hidden flex items-center justify-center hover:bg-accent transition-colors">
+                <img src="wts.png" alt="WhatsApp" class="w-full h-full object-cover"/>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/10 overflow-hidden flex items-center justify-center hover:bg-accent transition-colors">
+                <img src="tk.png" alt="TikTok" class="w-full h-full object-cover"/>
               </a>
             </div>
           </div>
@@ -448,6 +678,59 @@
     </footer>
 
     <!-- Vanilla JS Logic -->
+    <script>
+      (function () {
+        const el = document.getElementById('typing-text');
+        if (!el) return;
+
+        const words = ['software engineer', 'AI enthusiast', 'web developer'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        const typeSpeed = 100;   // ms per character while typing
+        const deleteSpeed = 50;  // ms per character while deleting
+        const hold = 2000;       // ms to keep full word visible
+
+        function tick() {
+          const current = words[wordIndex];
+
+          if (!deleting) {
+            // typing
+            charIndex++;
+            el.textContent = current.slice(0, charIndex);
+
+            if (charIndex === current.length) {
+              // finished typing -> hold then start deleting
+              deleting = true;
+              setTimeout(tick, hold);
+            } else {
+              setTimeout(tick, typeSpeed);
+            }
+          } else {
+            // deleting
+            charIndex--;
+            el.textContent = current.slice(0, charIndex);
+
+            if (charIndex === 0) {
+              deleting = false;
+              wordIndex = (wordIndex + 1) % words.length;
+              setTimeout(tick, 200);
+            } else {
+              setTimeout(tick, deleteSpeed);
+            }
+          }
+        }
+
+        // small initial delay, then start
+        setTimeout(() => {
+          charIndex = 0;
+          deleting = false;
+          tick();
+        }, 300);
+      })();
+    </script>
+
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
